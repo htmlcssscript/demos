@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue/dist/vue.js"></script>
+</head>
+<body>
+ <!-- 模板 -->
+  <div id="demo">
+  	{{message}}
+  </div>
+	<script>
+	 //数据
+		let data = {
+			message: "welcome back!"
+		}
+		//vue 实例
+		var vm = new Vue({
+			el: "#demo", //挂在元素
+			data: data
+		})
+	</script>
+</body>
+</html>
