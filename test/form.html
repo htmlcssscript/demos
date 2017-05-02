@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style> 
+
+        h2{
+            padding: 0;
+            margin: 0;
+        }
+        form {
+            width: 598px;
+            margin: 30px auto 0;
+            box-shadow: 0 0 10px 0 #ccc, 0 0 8px #343434;
+            color: #757575;
+        }
+        .section>div{
+            width: 568px;
+            padding: 15px;
+        }
+        .section>.caption{
+            background-color: #009688;
+            color: #fff;
+        }
+
+        .section .block,{
+            display: block;
+        }
+        .section .select label:after{
+            content: '';
+            display: block;
+        }
+        .section .block+input{
+            border: none;
+            outline: none;
+            padding: 5px 0; 
+            width: 100%;
+            border-bottom: 1px solid #808080;
+        } 
+
+        .section .textarea{
+           /*float: left;*/
+           outline: none;
+           border: none;
+           width: 100%;
+           resize: vertical;
+           border-bottom: 1px solid #808080;
+           min-height: 70px;
+        }
+        .section .select>div{
+            width: 50%;
+            float: left;
+        }
+        .section .submit{
+            clear: both;
+        }
+        .section .submit input{
+            border: none;
+            padding: 8px 10px;
+            background-color: #009688;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+   <form action="">
+      <div class="section">
+        <div class="caption">
+        <caption><h2>信息收集表</h2></caption>
+        </div>
+        <div class="username">
+           <label for="username" class="block">姓名</label>
+           <input type="text" id="username">
+        </div>
+        <div class="message">
+           <label for="message" class="block">QQ</label>
+           <input type="text" id="message">
+        </div>
+        <div class="talk">
+           <label for="talk" class="block">要说的话</label>
+           <textarea id="talk" class="textarea"></textarea>
+        </div>
+        <div class="select">
+           <div class="checkbox">
+               <input type="checkbox" id="Milk">
+               <label for="Milk">Milk</label>
+               <input type="checkbox" id="Sugar ">
+               <label for="Sugar ">Sugar</label>
+               <input type="checkbox" id=" Lemon ">
+               <label for=" Lemon "> Lemon</label>
+           </div>
+           <div class="radio">
+               <input type="radio" id="Male" name="name">
+               <label for="Male"> Male </label>
+               <input type="radio" id="Female" name="name">
+               <label for="Female"> Female </label>
+           </div>
+        </div>
+        <div class="submit">
+           <input type="submit" value="提交">
+        </div>
+    </div>
+   </form> 
+</body>
+</html>
