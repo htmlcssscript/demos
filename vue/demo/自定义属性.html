@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue/dist/vue.js"></script>
+</head>
+<body>
+ <!-- 模板 -->
+  <div id="demo">
+  	<input type="text" v-model="message"/>
+  	<p :curor="id">{{message}}</p>
+  </div>
+	<script>
+	 //数据
+		let obj = {
+			message: "welcome back!",
+			id: '123'
+		}
+		//vue 实例
+		var vm = new Vue({
+			el: "#demo", //挂载元素
+			data: obj,
+			methods:{
+				cliickHandle(){
+					alert('1');
+				}
+			}
+		})
+	</script>
+</body>
+</html>
