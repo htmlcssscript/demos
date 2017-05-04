@@ -5,10 +5,15 @@
 	<title>Document</title>
 	<style>
 		.section{
-			overflow: hidden;
+			/*overflow: hidden;*/
 			margin: 0 auto;
-        	width: 800px;
+      width: 800px;
 		} 
+    .section:after{
+      content: '';
+      display: inline-block;
+      clear: both;
+    }
 		img{
 			width: 260px;
 		}
