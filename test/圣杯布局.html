@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	 <style> 
+	    section{
+	    	padding-left: 150px;
+	    	padding-right: 200px;
+	    	
+	    }
+	    section:after{
+	    	content: '';
+	    	display: inline-block;
+	    	clear: both;
+	    }
+	 	main, aside{
+           float: left;
+	 	}
+	 	[main]{
+	 		width: 100%;
+	 		height: 400px;
+	 		background-color: green;
+	 	}
+	 	[left]{
+	 		width: 150px;
+	 		height: 200px;
+	 		background-color: red;
+	 		margin-left: -100%;
+	 		position: relative;
+	 		left: -150px;
+	 	}
+	 	[right]{
+	 		width: 200px;
+	 		height: 200px;
+	 		background-color: blue;
+	 		margin-left: -200px;
+	 		position: relative;
+	 		left: 200px;
+	 	}
+	 </style>
+</head>
+<body>
+	<section>
+		<main main>main</main>
+		<aside left>left</aside>
+		<aside right>right</aside>
+	</section>
+</body>
+</html>

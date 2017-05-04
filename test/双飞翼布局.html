@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	.content{
+		border: 1px solid;
+		overflow: hidden;
+		min-width: 600px;
+	}
+	aside{
+		width: 300px;
+		height: 300px;
+	} 
+	[left], [right], [main]{
+		float: left;
+	}
+	[main]{
+		width: 100%;
+		/*background: maroon;*/
+	}
+	.container{
+		margin-left: 300px;
+		margin-right: 300px;
+		background-color: blue;
+		height: 400px;
+	}
+
+	[left]{
+		background-color: green;
+		margin-left: -100%;
+
+	}
+	[right]{
+		background-color: red;
+		margin-left: -300px;
+
+	}
+
+
+	</style>
+</head>
+<body>
+<section class="content">
+	<main main>
+		<div class="container"></div>
+	</main>
+	<aside left></aside>
+	<aside right></aside>
+</section>
+</body>
+</html>
