@@ -1,0 +1,314 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	margin: 0;
+}
+
+html{
+	font-size: 16px;
+}
+
+a {
+	text-decoration: none;
+}
+
+li {
+	list-style: none;
+}
+/*--------------
+  common      */
+ .between{
+ 	width: 1140px;
+ 	margin: 0 auto;
+ 	text-align: center;
+ 	padding: 120px 0;
+ 	overflow: hidden;
+ }
+
+ .input{
+ 	width: 555px;
+ 	height: 62px;
+    border: none;
+    border-radius: 5px;
+	outline: none;
+	margin-bottom: 25px;
+	border: 1px solid #eee;
+ }
+
+
+
+/*--------------
+   navigation */
+#navigation{
+	width: 100%;
+	overflow: hidden;
+	padding: 20px 0;
+	position: absolute;
+	z-index: 2;
+}
+#navigation>.nav-bar{
+	 padding: 0;
+	 color: #fff;
+}
+#navigation>.nav-bar>ul{
+	float: right;
+}
+#navigation>.nav-bar>h1{
+	float: left;
+	vertical-align: bottom;
+	font-size:  20px;
+}
+#navigation>.nav-bar>h1 i{
+	font-variant: small-caps;
+}
+#navigation>.nav-bar>ul>li{
+	float: left;
+	font-size: 16px;
+	margin-right: 20px;
+
+}
+
+#navigation>.nav-bar>ul>li>a{
+  color: #fff;
+  font-size: 25px;
+
+}
+
+/*--------------
+   primary */
+#header {
+	height: 750px;
+	position: relative;
+	background: transparent url(https://image.tmdb.org/t/p/original/gM3KKiN80qbJgKHjPnmAfwxSicG.jpg) center center no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+}
+#header>.primary{
+	position: absolute;
+	color: #fff;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#header>.primary>h3{
+	font-size: 30px;
+}
+#header>.primary>p{
+	font-size: 50px;
+	margin: 10px 0 30px 0;
+}
+#header>.primary>a{
+	display: inline-block;
+	font-size: 18px;
+	padding: 15px 50px;
+	border-radius: 5px;
+	font-size: 20px;
+	color: #fff;
+	background: #ccc;
+}
+/*services 服务*/
+#section{
+	position: relative;
+} 
+#section:before{
+	position: absolute;
+	content: '';
+	height: 95%;
+	border: 3px solid pink;
+	top: 50%;
+	left: 80px;
+	transform: translate(-50%,-50%);
+}
+#section>div:before{
+	content: '🗼';
+	position: absolute;
+	left: 68px;
+	font-size: 25px;
+
+}
+
+#section>.services>ul>li{
+	width: 360px;
+	height: 360px;
+	float: left;
+	padding: 0 10px;
+	overflow: hidden;
+}
+#section>.services>ul>li{
+	width: 360px;
+	height: 360px;
+	float: left;
+	padding: 0 10px;
+}
+
+#section>div>div>p{
+	padding: 20px 0;
+}
+
+#section>.services .icon-skill{
+	display: inline-block;
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+}
+
+
+#section>.services .icon-one{
+	background: transparent url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/150px-Unofficial_JavaScript_logo_2.svg.png) bottom right no-repeat;
+}
+#section>.services .icon-two{
+	background: transparent url(https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Html5_css3_styling.svg/150px-Html5_css3_styling.svg.png) bottom right no-repeat;
+	background-size: 80%;
+}
+#section>.services .icon-three{
+	background: transparent url(https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Old_HTML_Logo.svg/100px-Old_HTML_Logo.svg.png) center center no-repeat;
+	background-size: cover;
+	background-size: 70%;
+
+}
+/*product 产品*/ 
+#section>.product .show{
+   padding: 15px 0;
+   margin-top: 5px;
+
+
+}
+#section>.product>ul>li{
+	float: left;
+	width: 140px;
+	margin: 10px;
+	margin-bottom: 20px;
+	box-shadow: 0 0 5px 0 #ccc;
+	background-color: #DBDEDE;
+	opacity: .8
+}
+#section>.product .books>li>img{
+	width: 140px;
+	height: 140px;
+}
+/*about*/ 
+#section>.about>ul{
+	margin: 0 auto;
+}
+#section>.about>ul>li{
+	display: inline-block;
+	text-align: center;
+	padding: 30px  5px;
+	margin: 0 auto;
+}
+#section>.about>ul>li>div{
+	text-shadow: 0 0 2px #ccc,0 0 2px #ccc,0 0 2px #ccc;
+	font-size: 20px;
+}
+
+
+/*info*/ 
+#section>.info>ul>li{
+	width: 360px;
+	float: left;
+	padding: 10px;
+	margin: 0 auto
+}
+#section>.info>ul>li>.message{
+	text-align: center;
+}
+#section>.info>ul>li>.message>li{
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	padding: 10px;
+}
+#section>.info>.message-description{
+	width: 750px;
+}
+/*product-logo*/ 
+#section>.product-logo{
+	text-align: center;
+	padding: 50px 0;
+  font-size: 0;
+
+
+}
+#section>.product-logo>ul{
+  display: inline-block;
+
+}
+#section>.product-logo>ul>li{
+	margin: 0 40px;
+	width: 200px;
+	float: left;
+}
+/*message*/
+
+#section>.message .information{
+	width: 555px;
+	float: left;
+}
+
+#section>.message .information-text{
+	width: 555px;
+	float: right;
+	padding-right: 2px;	
+}
+
+#section>.message{
+  padding: 60px 0 0;
+}
+
+#section>.message .introduce{
+ padding: 30px;
+}
+
+#section>.message .block{
+ overflow: hidden;
+}
+
+#section>.message .input{
+ font-size: 18px;
+ padding-left: 10px;
+}
+::-webkit-input-placeholder{
+	color: #bbb;
+}
+
+#section>.message .information-text textarea{
+	width: 555px;
+	height: 330px;
+	border-color: #eee;
+	border-radius: 5px;
+	outline: none;
+	resize: none;
+	font-size: 20px;
+	color: #bbb;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+#section>.message .getmessage{
+  border: none;
+  padding: 20px 80px;
+  background-color: #222;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+#footer{
+	text-align: center;
+	background: #F7F2F2;
+}
+#footer>ul{
+	padding: 20px 0;
+}
+#footer .icon>li{
+	display: inline-block;
+	vertical-align: middle;
+}
+#footer>ul>li{
+	display: inline-block;
+	width: 33%;
+}
