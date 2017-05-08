@@ -1,0 +1,22 @@
+<script>
+	var prod = {
+		name: '女装',
+		styles: ['短款', '冬季', '春装']
+	};
+	function getTpl(data){
+	    var arr = [];
+	    arr.push('<dl class="product">'+'\n')
+	    arr.push('\t'+'<dt>'+data.name+'</dt>'+'\n')
+
+	    for(var i in data.styles){
+        arr.push('\t'+'<dd>'+data.styles[i]+'</dd>'+'\n')
+	    }
+      
+      arr.push('</dl>')
+
+      return arr.join('');
+
+	};
+
+	console.log(getTpl(prod));
+</script>
