@@ -234,7 +234,7 @@ li {
 #section>.product-logo{
 	text-align: center;
 	padding: 50px 0;
-  font-size: 0;
+    font-size: 0;
 
 
 }
@@ -246,6 +246,64 @@ li {
 	margin: 0 40px;
 	width: 200px;
 	float: left;
+
+}
+
+/*work history*/
+
+#section>.work-history{
+	padding: 30px 100px;
+	box-sizing: border-box;
+	position: relative;
+	margin-bottom: 150px;
+}
+
+#section>.work-history:before{
+	content: '';
+	width: 1px;
+	height: 95%;
+	background-color: pink;
+	position: absolute;
+	left: 50%;
+	box-shadow: 0 0 2px 0 #ccc;
+}
+#section>.work-history>div{
+	width: 250px;
+	margin-bottom: 200px;
+	border-radius: 3px;
+}
+#section>.work-history>p{
+	margin-bottom: 40px;
+}
+#section>.work-history>div:nth-child(odd){
+	float: left;
+	clear: both;
+}
+#section>.work-history>div:nth-child(odd)>div{
+	text-align: right;
+}
+#section>.work-history>div:nth-child(even)>div{
+	text-align: left;
+}
+#section>.work-history>div:nth-child(even)>div>p{
+	 font-size: 17px;
+	 color: pink;
+}
+#section>.work-history>div:nth-child(even)>div>h4{
+	 font-size: 20px;
+}
+#section>.work-history>div:nth-child(even){
+	float: right;
+	clear: both;
+}
+#section>.work-history>div>img{
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	left: 50%;
+	border-radius: 50%;
+	border: 5px solid #eee;
+	transform: translateX(-50%);
 }
 /*message*/
 
