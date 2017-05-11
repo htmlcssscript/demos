@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    li{list-style: none}
+    .wrap{display: inline-block;border: 1px solid #ccc;padding: 20px}
+    .m-tab{font-size: 0;padding:0}
+    .m-tab>.active{border: 1px solid #ccc;border-bottom-color: #fff;border-radius: 5px 5px 0 0;color: #f60;}
+    .m-tab>li{display: inline-block;font-size:16px;padding: 15px 50px;margin-bottom:-1px;color: #FCA2A2;border: 1px solid transparent;}
+    .m-content{padding: 0;margin:0;border-top: 1px solid #ccc}
+    .m-content>li{padding: 20px 15px;color:#58a;display: none;}
+    .m-content>.active{display:block;}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <ul class="m-tab">
+      <li class="active">选项1</li>
+      <li>选项2</li>
+      <li>选项3</li>
+    </ul>
+    <ul class="m-content">
+      <li class="active"><ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+      </ul></li>
+      <li><ul>
+        <li>10-1</li>
+        <li>10-2</li>
+        <li>10-3</li>
+        <li>10-4</li>
+        <li>10-5</li>
+        <li>10-6</li>
+        <li>10-7</li>
+        <li>10-8</li>
+        <li>10-9</li>
+        <li>10-10</li>
+      </ul></li>
+      <li><ul>
+        <li>1+1</li>
+        <li>2+2</li>
+        <li>3+3</li>
+        <li>4+4</li>
+        <li>5+5</li>
+        <li>6+6</li>
+        <li>7+7</li>
+        <li>8+8</li>
+        <li>9+9</li>
+        <li>10+10</li>
+      </ul></li>
+    </ul>
+  </div>
+  <script> 
+    var ap = Array.prototype
+    var index
+    $('.m-tab').addEventListener('click',tab)
+    function tab(e){
+      if(e.target.tagName.toLowerCase() == 'li'){
+        ap.forEach.call(this.children,function(el){
+          el.classList.remove('active')
+          
+        })
+        e.target.classList.add('active')
+
+        index = Array.prototype.indexOf.call(this.children,e.target)
+         
+        ap.forEach.call($('.m-content').children,function(el){
+          el.classList.remove('active')
+        })
+        $('.m-content').children[index].classList.add('active')
+      }
+    }
+
+    function $(id){
+      return document.querySelector(id)
+    }
+  </script>
+</body>
+</html>

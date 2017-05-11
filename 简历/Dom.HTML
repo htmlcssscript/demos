@@ -1,0 +1,138 @@
+题目1： DOM0 事件和DOM2级在事件监听使用方式上有什么区别？
+
+Dom0：将一个函数赋值给一个事件处理程序属性
+Dom2: 调用函数
+
+
+题目2： attachEvent与addEventListener的区别？
+1. 
+attachEvent:   事件处理程序会在全局中运行,因此this=window
+               IE8以及更早版本只支持事件冒泡
+               事件类型加on
+               添加2个相同的事件会先执行后一个，在执行前一个
+               第二个参数为处理函数，主要加函数名。否则无法删除
+2.
+addEventListr: 事件处理程序在其依赖的元素的作用域运行，与IE相反
+               与IE相对应不仅支持事件冒泡，还支持事件捕获.称事件流
+               addEventLister()的第三个参数可以修改冒泡或者捕获
+               第二个参数为处理函数，主要加函数名。否则无法删除
+               事件类型不用on
+
+
+题目3： 解释IE事件冒泡和DOM2事件传播机制？
+
+
+
+题目4：如何阻止事件冒泡？ 如何阻止默认事件？
+
+非IE阻止事件冒泡：e.stopPropagation()
+非IE阻默认事件   e.preventDefault()
+
+非IE阻止事件冒泡：e.cancelable
+非IE阻默认事件   e.returnValue
+
+
+题目5：有如下代码，要求当点击每一个元素li时控制台展示该元素的文本内容。不考虑兼容
+<ul class="ct">
+    <li>这里是</li>
+    <li>饥人谷</li>
+    <li>前端6班</li>
+</ul>
+<script>
+
+  $('.ct').addEventListener('click', handler)
+
+  function $(el){
+  	return document.querySelector(el)
+  }
+
+  function handler(e){
+      var oText = e.target.innerText
+      console.log(oText)
+  }
+
+
+</script>
+
+题目6： 补全代码，要求：
+
+当点击按钮开头添加时在<li>这里是</li>元素前添加一个新元素，内容为用户输入的非空字符串；当点击结尾添加时在最后一个 li 元素后添加用户输入的非空字符串.
+当点击每一个元素li时控制台展示该元素的文本内容。
+
+<ul class="ct1">
+    <li>这里是</li>
+    <li>饥人谷</li>
+    <li>任务班</li>
+</ul>
+
+<input class="ipt-add-content" placeholder="添加内容"/>
+<button id="btn-add-start">开头添加</button>
+<button id="btn-add-end">结尾添加</button>
+<script>
+var rg = /^\s+|\s+$/g
+var ms = $('.ipt-add-content')
+
+$('#btn-add-start').addEventListener('click', handler)
+$('#btn-add-end').addEventListener('click', handler)//判断id选择
+$('.ct1').addEventListener('click', ts)
+ 
+
+
+  function $(el){
+  	return document.querySelector(el)
+  }
+
+ function handler(e){
+    var message = ms.value.replace(rg, '')
+ 	if(message.length==0) return
+    console.log(message)
+
+    var oLi=document.createElement('li')
+    oLi.innerHTML = message
+
+    if(e.target.id=='btn-add-start'){
+     $('.ct1').insertBefore(oLi,  $('.ct1').firstChild)
+    }else{
+     $('.ct1').appendChild(oLi)
+    }
+    ms.value = ''
+
+ }
+
+	function ts(e){
+		var message = e.target.innerText
+		console.log(message)
+	}
+
+</script>
+
+题目7： 补全代码，要求：当鼠标放置在li元素上，会在img-preview里展示当前li元素的data-img对应的图片。
+<ul class="ct2">
+    <li data-img="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQLDuMzNb49vsxj0jZvYrJnJz8zk3pebawHiwBh7SzV7G_fTpDRwg">鼠标放置查看图片1</li>
+    <li data-img="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQDSExFOjcZcKXB9xSZnmzCYUSXN0GRS1nGlnAKG6Vp6vooszeWIw">鼠标放置查看图片2</li>
+    <li data-img="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSUBVUp7DcLGabhm0xeVGbRiz-mAepMCo8Q6ZR0kvlZ0j2l4uZ4">鼠标放置查看图片3</li>
+</ul>
+<div class="img-preview"><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSUBVUp7DcLGabhm0xeVGbRiz-mAepMCo8Q6ZR0kvlZ0j2l4uZ4" alt=""></div>
+<style>
+	.img-preview{
+		min-width: 100px;
+		min-height: 100px;
+		display: inline-block;
+		border: 1px solid #f60;
+	}
+</style>
+<script>
+  $('.ct2').addEventListener('mouseover', over)
+   function $(el){
+  	return document.querySelector(el)
+  }
+
+  function over(e){
+    var src = e.target.getAttribute('data-img')
+    var oLi = e.target.tagName.toLowerCase()
+    if(oLi==='li'){
+    	$('.img-preview').innerHTML = '<img src =' + src + ' />'
+    }
+  }
+
+</script>
