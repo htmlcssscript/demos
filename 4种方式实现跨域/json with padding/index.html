@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head id="head">
+</head>
+<body>
+  <div class="query-area">
+    <button>换一组</button>   
+  </div>
+  <div class="detail-area">
+    <ul>     
+      <li>01</li>
+      <li>02</li>
+    </ul>
+
+  </div>
+
+  <script>
+    var btn = document.querySelector('.query-area button')
+    btn.addEventListener('click', function(){ 
+         createEl()
+          
+        window.accept=function(data){
+          console.log(typeof data)
+            render(data)
+        }
+
+      })
+    
+ 
+
+   function createEl(){
+      var script = document.createElement('script');
+      script.src = 'http://a.jrg.com:8080/getData?callback=accept';
+      console.log(script)
+      document.head.appendChild(script);
+      console.log(script)
+      document.head.removeChild(script);
+   }
+
+
+
+
+    function render(data){ 
+      // var data = JSON.parse(data)
+       console.log(typeof data)
+      var detailCt = document.querySelector('.detail-area ul')
+      detailCt.innerHTML = '';
+      var ct = document.createDocumentFragment()
+      for(var i = 0; i < data.length; i++){
+        var node = document.createElement('li')
+        node.innerText = data[i]
+        ct.appendChild(node)
+      }
+      detailCt.appendChild(ct)
+    }
+  </script>
+  
+</body>
+</html>

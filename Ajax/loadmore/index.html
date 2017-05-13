@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    ul{
+      padding: 0;
+    }
+
+   .detail-area li{
+     border: 1px solid #ddd;
+     list-style: none;
+     margin: 20px 0;
+     padding: 15px 10px;
+     color: #777
+   }
+    .query-area{
+      margin: 0 auto;
+      width: 107px
+    }
+   .query-area a{
+      padding: 15px;
+      color: #58a;
+      border: 1px solid #58a;
+      border-radius: 3px;
+      display: inline-block;
+      margin: 10px auto;
+      cursor: pointer;
+      text-decoration: none;
+   }
+   .query-area a:hover{
+     background-color: #58a;
+     color: #fff;
+     border: none;
+   }
+  </style>
+  <script src="ajax.js"></script>
+</head>
+<body>
+  <div class="detail-area">
+    <ul>     
+    </ul>
+  </div>
+  <div class="query-area">
+    <a href="javascript:;">loadMore</a>
+  </div>
+  <script>
+    var btn = document.querySelector('.query-area a')
+    var oUl = document.querySelector('.detail-area ul')
+    var flag = true
+    var pageIndex = 0
+    btn.addEventListener('click',function(e){
+       if(!flag){return}
+       loadData(function(news){
+           render(news)
+           pageIndex += 5
+           flag = true
+           btn.innerText="loadMore"
+       })
+       flag = false
+       btn.innerText="加载中"
+    })
+  
+
+
+
+  function loadData(callback){ 
+    ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/loadMore',
+        data:{
+            index: pageIndex,
+            length: 5
+        },
+        success:callback,
+        error:function(){console.log('出错了')}
+    })
+
+  }
+
+  function render(news){
+     var fragment = document.createDocumentFragment()
+      for(var i=0;i<news.length;i++){
+       var friend = document.createElement('li')
+         friend.innerText = news[i]
+         fragment.appendChild(friend)
+      }
+     oUl.appendChild(fragment)
+  }
+  </script>
+  
+</body>
+</html>

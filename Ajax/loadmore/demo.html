@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    ul{
+      padding: 0;
+    }
+
+   .detail-area li{
+     border: 1px solid #ddd;
+     list-style: none;
+     margin: 20px 0;
+     padding: 15px 10px;
+     color: #777
+   }
+    .query-area{
+      margin: 0 auto;
+      width: 107px
+    }
+   .query-area a{
+      padding: 15px;
+      color: #58a;
+      border: 1px solid #58a;
+      border-radius: 3px;
+      display: inline-block;
+      margin: 10px auto;
+      cursor: pointer;
+      text-decoration: none;
+   }
+   .query-area a:hover{
+     background-color: #58a;
+     color: #fff;
+     border: none;
+   }
+  </style>
+</head>
+<body>
+  <div class="detail-area">
+    <ul>     
+    </ul>
+  </div>
+  <div class="query-area">
+    <a href="#">loadMore</a>
+  </div>
+  <script>
+    var btn = document.querySelector('.query-area a')
+    var oUl = document.querySelector('.detail-area ul')
+    var flag = true
+    var pageIndex = 0
+    btn.addEventListener('click',function(e){
+       e.preventDefault()
+       if(!flag){return}
+       ajax()
+       flag = false
+    })
+  
+   function ajax(){
+      var xhr = new XMLHttpRequest()
+      xhr.onreadystatechange=function(){
+        if(xhr.readyState === 4){
+          if( xhr.status>=200 && (xhr.status<300 || xhr.status===304 )){
+            var result = JSON.parse(xhr.responseText)
+            console.log(result)
+            render(result)
+          }else{
+            console.log(xhr.status)
+          }
+            pageIndex += 5
+            flag = true
+        }
+      }
+     
+      xhr.open('GET','/loadMore?index='+pageIndex+'&length=5',true)
+      xhr.send()
+   }
+   function render(data){
+    var fragment = document.createDocumentFragment()
+      for(var i=0;i<data.length;i++){
+       var friend = document.createElement('li')
+         friend.innerText = data[i]
+         fragment.appendChild(friend)
+      }
+
+     oUl.appendChild(fragment)
+    }
+  </script>
+  
+</body>
+</html>

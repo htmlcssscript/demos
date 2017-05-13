@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <script src="ajax.js"></script>
+</head>
+<body>
+  <div class="query-area">
+    <input type="text" name="username" value="wahaha" class="username"><br>
+    <input type="password" name="password" class="password"><br>
+    <button>send</button>   
+  </div>
+  <div class="detail-area">
+    <ul>     
+    </ul>
+  </div>
+
+  <script>
+    var btn = document.querySelector('.query-area button')
+    var username = document.querySelector('.query-area .username')
+    var password = document.querySelector('.query-area .password')
+    var flag=true
+
+    btn.addEventListener('click', function(){
+      if(!flag){return}
+      ajax({
+        url: '/login',
+        type: 'GET',
+        dataType: 'json',
+        data:{
+          username: username.value,
+          password: password.value
+        },
+        success: function(result){
+          render(result)
+          flag=true
+        },
+        error:function(){console.log('出错了')}
+      })
+      flag=false
+    })
+
+
+
+
+    function render(friends){
+      console.log(friends)
+      var detailCt = document.querySelector('.detail-area ul')
+      detailCt.innerHTML = '';
+      var ct = document.createDocumentFragment()
+      for(var i = 0; i < friends.length; i++){
+        var node = document.createElement('li')
+        node.innerText = friends[i]
+        ct.appendChild(node)
+      }
+      detailCt.appendChild(ct)
+    }
+  </script>
+  
+</body>
+</html>

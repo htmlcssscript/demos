@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div class="query-area">
+    <input type="text" name="username" value="hunger" placeholder="hunger, ruoyu, anyone">
+    <button>查询朋友</button>   
+  </div>
+  <div class="detail-area">
+    <ul>     
+    </ul>
+  </div>
+
+  <script>
+    var btn = document.querySelector('.query-area button')
+    var input = document.querySelector('.query-area input')
+    var oUl = document.querySelector('.detail-area ul')
+    var flag = true
+    btn.addEventListener('click',function(){
+      var xhr = new XMLHttpRequest()
+       if(!flag){
+         return
+       }
+      xhr.onreadystatechange=function(){
+        if(xhr.readyState == 4){
+          if( xhr.status>=200 && (xhr.status<300 || xhr.status==304 )){
+            var data = JSON.parse(xhr.responseText)
+            console.log(data)
+            render(data)
+          }else{
+            console.log(xhr.status)
+          }
+        }
+        flag = true
+      }
+      xhr.open('GET','/getFriends?username='+input.value+'&length=5',true)
+      xhr.send()
+      flag = false
+    })
+
+   function render(data){
+    var fragment = document.createDocumentFragment()
+      for(var i=0;i<data.length;i++){
+       var friend = document.createElement('li')
+         friend.innerText = data[i]
+         fragment.appendChild(friend)
+      }
+
+     oUl.appendChild(fragment)
+    }
+  </script>
+  
+</body>
+</html>
