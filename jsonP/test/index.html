@@ -1,0 +1,28 @@
+<title>首页</title>
+<meta charset="utf-8">
+<h5>你好，这是我的第一个页面</h5>
+<input id=xxx><br>
+<button id="btn">click me</button>
+<script>
+  var btn = document.getElementById('btn')
+  var text = document.getElementById('xxx')
+  var json = {}
+
+
+  btn.onclick=function(){
+      var stringRandom = 'jQuery'+ parseInt(Math.random()*10000,10)
+      window[stringRandom]=function(data){
+        console.log(data)
+      }
+
+    var a = document.createElement('script')
+        
+        a.src="/main.js?content="+stringRandom
+
+        document.body.appendChild(a)
+
+
+  }
+
+ 
+</script>
