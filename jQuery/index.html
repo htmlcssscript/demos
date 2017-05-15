@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!--<script src="jquery-3.2.1.min.js"></script>-->
+    <script src="http://apps.bdimg.com/libs/jquery/1.3.0/jquery.js"></script>
+    <style>
+    .wrap{width: 200px;height: 200px;border: 1px solid #ccc;}
+    .wrap>ul{width: 100px;height: 100px;border: 1px solid red;}
+    </style>
+</head>
+<body>
+    <!--<div class="box">
+        <span class="who">我是谁</span>
+        <span class="whp">你是谁</span>
+    </div>-->
+
+    <!--<div class="box2">
+        <input type="text" value="">
+    </div>-->
+  
+  <div class="wrap">
+    <ul class="list">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+  </div>
+    
+
+    <button class="btn">click me</button>
+    <script> 
+        $('body').live('click', function(){console.log(3)})
+      
+        $('.wrap').live('click', function(){console.log(2)})
+
+        $('.list li').bind('click', function(e){
+            // e.stopPropagation()
+            console.log(1)
+            })
+        // var $ct = $('<div>点击</div>')
+        // $('.box').append($ct)
+        // $($ct).prependTo($('.box'))
+        // $('.box').prepend($ct)
+
+        // $('.who').on('click', function(){console.log(123)})
+        // var $yy = $('.who').remove()删除不保留事件  驻扎内存中
+        // var $yy = $('.who').remove()删除保留事件 驻扎内存中
+        // $('.whp').after($yy)
+
+        // $('.box2>input').val('hello world')
+
+        // $('.list').delegate('li','click', function(){
+        //     $(this).html('hello world')
+        // })
+        // $('.btn').on('click',function(){
+        //     $('.list').append($('<li>5</li>'))
+        // })
+        
+
+        // $('.list').on('click.console', 'li', function(e){
+        //     console.log('hello world')
+        // })
+        // $('.list').off('click.console')
+
+        // $('.btn').on('click', function(){
+        //     $('body').animate({scrollTop: 0}, 1000);
+        // })
+
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+  <script>
+   $(function(){
+        $('.wrap2').hide()
+        $('.wrap>li').hover(function(){
+            $(this).children('.wrap2').show()
+            },function(){
+            $(this).children('.wrap2').hide()
+        })
+   })
+  </script>
+  <style>
+    body{
+    padding: 10px;
+    }
+    *{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    }
+
+    .wrap{
+    display: inline-block;
+    background-color: #C7171E;
+    }
+
+    .wrap>li{
+    width: 200px;
+    padding: 10px;
+    border-bottom: 1px dotted #DE272E;
+    position: relative;
+    }
+
+    .wrap>li>a{
+    color: #fff;
+    
+    }
+
+    .wrap>li:after{
+    position: absolute;
+    content:'>';
+    right: 20px;
+    color: #fff;
+    }
+    .wrap>li:hover:after{
+    content: '<';
+    }
+    /*--------------------------------*/
+    .wrap2{
+    width: 200px;
+    border: 1px solid #ccc;
+    padding-left: 10px;
+    position: absolute;
+    top: 0px;
+    left: 220px;
+    font-size: 0;
+    background-color: #fff;
+    }
+
+    .wrap2 li{
+    width: 100px;
+    padding: 10px 10px; 
+    display: inline-block;
+    font-size: 13px;
+    box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <ul class="wrap">
+    <li>
+      <a href="">珠宝玉器</a>
+       <div class="wrap2">
+         <ul>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+         </ul>
+       </div>
+    </li>
+    <li>
+      <a href="">珠宝玉器</a>
+      <div class="wrap2">
+         <ul>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+         </ul>
+       </div>
+    </li>
+    <li>
+      <a href="">珠宝玉器</a>
+      <div class="wrap2">
+         <ul>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+         </ul>
+       </div>
+    </li>
+    <li>
+      <a href="">珠宝玉器</a>
+        <div class="wrap2">
+         <ul>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+         </ul>
+       </div>
+    </li>
+    <li>
+      <a href="">珠宝玉器</a>
+       <div class="wrap2">
+         <ul>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+           <li>珠宝</li>
+         </ul>
+       </div>
+    </li>
+  </ul>
+</body>
+</html>
