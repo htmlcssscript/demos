@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="jquery-3.2.1.min.js"></script>
+    <title>Document</title>
+    <style>
+    .run{
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        position: absolute;
+        margin-top: 50px;
+    }
+    </style>
+</head>
+<body>
+    <!--<div>wo is hide</div>
+    <div>wo is show</div>-->
+
+    <div class="run"></div>
+    <button class="me">click me</button>
+    <button class="stop">stop</button>
+    <script>
+        //hide
+    //  $('div').eq(0).hide(500,'linear',function(){
+    //      alert(1)
+    //  })
+        
+        //animate
+        
+        var pot = [
+            {"background-color": "red"},
+            {"background-color": ""},
+            {"background-color": "blue"},
+        ]
+
+        $('.run').on('click', function(){
+            
+        })
+
+        $('.stop').click(function(){
+            // $('.run').stop(true, true)
+            $('.run').finish()
+        })
+    </script>
+</body>
+</html>

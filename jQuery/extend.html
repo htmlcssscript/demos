@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://apps.bdimg.com/libs/jquery/1.3.0/jquery.js"></script>
+</head>
+<body> 
+    <div class="container">
+        <div class="box">
+            <div class="div1">div1</div>
+            <div class="div2">div2</div>
+        </div>
+    </div>
+    <!--<button></button>-->
+    <script>
+//  $.extend
+    // var obj1 = {
+    //     name: 'lii',
+    //     age: 32,
+    //     live: 'city',
+    //     f:[1,2,3,4]
+    // }
+  
+    // var obj = {}
+
+    // $.extend(obj, obj1)
+    // $.extend(true,obj, obj1)
+
+    // $.extend($.fn,obj1)为每个元素绑定obj1属性
+
+// 剪贴
+
+//   $('.box').append($('.div1'))
+  
+  //.clone() 克隆 
+  var clone = $('.div1').clone()
+  clone.appendTo($('.box'))
+     </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>data demo</title>
+  <style>
+   body{
+       padding: 0;
+       margin: 0;
+   }
+   .box{
+       position: absolute;
+       top: 10px;
+       left: 10px;
+       
+   }
+   .ct{
+       padding: 5px;
+       border: 1px solid;
+       width: 20px;
+       height: 20px;
+       position: absolute;
+       /*left: 5px;
+       top: 5px;*/
+   }  
+  </style>
+  <script src="jquery-3.2.1.min.js"></script>
+  
+</head>
+<body>
+
+    <!--<div class="box">
+      <div class="ct"></div>
+    </div>-->
+
+ <a href="s" class="node">sdf</a>
+
+ <ul class="ct">
+     <li class="item">1</li>
+     <li>2
+         <ul>
+             <li>1</li>
+             <li>2</li>
+             <li>3</li>
+             <li>4</li>
+             <li>5</li>
+             <li>6</li>
+             <li>7</li>
+             <li>8</li>
+             <li>9</li>
+             <li>10</li>
+         </ul>
+     </li>
+     <li class="index">3</li>
+     <li>4</li>
+     <li>5</li>
+ </ul>
+
+<script>
+
+
+//  $node.addClass('active')                                        1
+//  $node.removeClass('active')                                     
+
+//  $node.show()                                                    2
+//  $node.hide()  
+
+// $node.attr({                                                     3
+//     'id': '1',
+//     'title': '2',
+//     'src': '3'
+// })
+
+//  $node.attr('data-src','1')                                      4
+
+//  $node.prepend($('<h2>hello world</h2>'))                        5
+
+//$node.append($('<h2>hello world</h2>'))                           6
+
+//$node.hide()                                                      7
+
+//$('.ct').empty() | $('.ct').html('')                              8
+
+//$('.ct').html('<div class="btn"></div>')                          9
+
+//console.log($('.ct').width())实际高度                              10
+//console.log($('.ct').innerWidth())实际高度+padding
+//console.log($('.ct').outerWidth())实际高度+padding+border
+
+// $('.ct').srcollTop()                                             11
+
+
+// console.log($('.ct').offset())                                   12
+
+// $('.node').css({'font-size':'14px','color': 'red'})              13
+
+// $('ul>li').each(function(){                                      14
+//     var $text = $(this).text()
+//     $(this).text($text+$text)
+// })
+
+// $('.ct>li').each(function(){                                     15
+//     if($(this).hasClass('item')){
+//          console.log('true')
+//     }
+// })
+// $('.ct *') | $('.ct').find('*')                                  16
+
+// $(node).parents('.ct').find('.panel')                            17
+
+// console.log($('.ct>li').length)                                  18
+
+//console.log($('.index').index())                                  19
+</script>
+</body>
+</html>

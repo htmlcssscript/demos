@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.min.js"></script>
+  <style>
+    ul{
+      padding: 0;
+    }
+    li{
+      list-style: none;
+      padding: 5px 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      border-radius: 4px;
+     }
+     li:hover{
+       background-color: #58a;
+     }
+
+    a{
+      text-decoration: none
+     }
+
+     .load-more{
+       padding: 10px 20px;
+       border: 1px solid #ccc;
+       border-radius: 4px;
+       color: #58a;
+       background-color: #ddd;
+     }
+     div{
+       margin: 0 auto;
+       width: 107px;
+     }
+  </style>
+  <script>
+   function fnSu(ret){
+    var str = ''   
+    if(ret.status === 0){
+      if(ret.data.length != 0){
+        $.each(ret.data,function(){
+          str += `<li><a href="javascript:void(0)">${this}</a></li> `                    
+        })
+        $(str).appendTo($('.container'))  
+        $('.load-more').text('加载更多')
+      }else{
+         $('.load-more').text('暂无数据') 
+      }
+    }
+   }
+  </script>
+  <script>
+    $(function(){
+    var pageIndex = 0
+    var flag = true
+    $('.load-more').on('click', function(){ //点击获取数据
+      if(!flag){return}
+      $(this).text('加载中')
+      $.ajax({
+        url: '/loadMore',
+        data:{
+          page: pageIndex
+        },
+        type: 'get',
+        dataType: 'json',
+       success: function(ret){ //数据插入到Dom中
+           pageIndex++     
+           fnSu(ret)                   
+           flag = true
+          
+        },
+        error: function(){
+            console.log('fail')
+        }
+      })
+      flag = false
+    })  
+
+ })                            
+  </script>
+</head>
+<body>
+  <ul class="container">
+    <li><a href="javascript:void(0)">内容1</a></li>
+    <li><a href="javascript:void(0)">内容2</a></li>
+  </ul>
+  <div>
+   <a href="javascript:void(0)" class="load-more">加载更多</a>
+  </div>
+</body>
+</html>

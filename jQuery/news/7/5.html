@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.min.js"></script>
+</head>
+<body>
+    <select id="test">
+        <option value="aaa">sdfsf</option>
+        <option value="bbb">sdfg</option>
+        <option value="aaa">sfg</option>
+        <option value="ccc">sdfgdg</option>
+    </select>
+    <script> 
+    $('#test').on('input', function(){
+            var options=$("#test option:selected");
+            console.log(options.text())
+    })
+
+    </script>
+</body>
+</html>
