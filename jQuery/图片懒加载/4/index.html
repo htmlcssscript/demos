@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head> 
+<body> 
+ <style> 
+	   h3,ul,body,li{
+	     padding: 0;
+	     margin: 0;
+			 list-style: none;
+	   }
+
+	  .news{
+	    display: block;
+
+	  }
+	  .news:after{
+	  	content: '';
+	  	display: block;
+	  	clear: both;
+	  }
+
+	  .news li{
+	    width: 750px;
+	    height: 120px;
+	    margin-bottom: 15px;
+			background: #ccc;
+	  }
+
+	  .news img{
+	    width: 115px;
+	    height: 120px;
+	    float: left;
+	    margin-right: 5px;
+	  }
+	  div h3{
+	   margin-bottom:75px;
+		 color: #fff;
+		 font-size: 18px;
+
+	  }
+		div h3{
+	   margin-bottom:75px;
+		 color： #000;
+		 font-size: 18px;
+
+	  }
+		div sapn{
+		 color：#eee;
+		 font-size: 12px;
+	  }
+	  #loadMore{
+	  	visibility: hidden;
+	  	height: 0;
+	  }
+ </style>
+  <div class="wrap">
+    <ul class="news"> </ul>
+  </div>
+  <p id="loadMore">加载更多</p>
+  <script src="jQuery.min.1.9.0.js"></script>
+  <script> 
+
+
+//ajax 请求数据 
+	 function getNews(){ 
+		isNewsArrive = false
+	  $.get('/msgData',{page: pageIndex}).done(function(ret){
+	        //2.将请求的数据填充到Dom中并 判断 标签是不是在可视范围内，
+			isNewsArrive = true
+			if(ret.status === 0){
+				  ++pageIndex
+					render(ret.data)
+			    checkNews()
+			}
+		})
+	}
+//生成Dom
+	 function render(data) {
+	      var str = ''
+	      var $ul = $('.news')
+				if(data.length === 0){
+					isOver = true
+					$('.wrap').append('<p>back to the top</p>')
+				}
+
+	      $.each(data,function(){ 
+	        str += `
+	            <li>
+	              <img src=${this.img}>
+	              <div>
+	                <h3>${this.title}</h3>
+	                <span>${this.description}</span>
+	              </div>
+	            </li>
+	        `  
+	      })
+	        $ul.append(str)
+	   } 
+
+//判断是否在视口
+	 function isShow($ele){
+	        var offsetTop = $ele.offset().top
+	        var windowHeight = $(window).height()
+	        var windowScroll = $(window).scrollTop()
+	        var selfHeight = $ele.outerHeight(true)
+	        if( offsetTop < windowHeight + windowScroll && windowScroll < selfHeight + offsetTop){
+	            return true
+	        }else{
+	            return false
+
+	        }
+	     }
+  </script>
+  <script> 
+    var pageIndex = 0
+    var isOver = false//防止过快滚动 还没请求成功
+		var isNewsArrive  = true;
+    getNews()
+    $(window).on('scroll',checkNews)
+		function checkNews(){
+ //重复语句合成
+	    if(isShow($('#loadMore')) && !isOver && isNewsArrive){ 
+	      getNews()
+	    }
+     }
+  </script>
+</body>
+</html>

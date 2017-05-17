@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.min.js"></script>
+</head>
+<body>
+    <p>题目1：如何判断一个元素是否出现在窗口可视范围（浏览器的上边缘和下边缘之间，肉眼可视）。写一个函数 isVisible实现</p>
+    <script>
+     function isVisible($img){
+       var offsetTop = $img.offsetTop
+       var windowHeight = $(window).height()
+       var windowScroll = $(window).scrollTop()
+       var selfHeight = $img.outerHeight(true)
+       if( offsetTop < windowHeight + windowScroll && windowScroll < selfHeight + offsetTop){
+        return true
+       }else{
+        return false
+       }
+     }
+    </script>
+    
+    <p>题目2：当窗口滚动时，判断一个元素是不是出现在窗口可视范围。每次出现都在控制台打印 true 。用代码实现</p>
+    <script>
+      $(window).on('scoll' ,isVisible($img))
+
+      function isVisible($img){
+       var offsetTop = $img.offset().top
+       var windowHeight = $(window).height()
+       var windowScroll = $(window).scrollTop()
+       var selfHeight = $img.outerHeight(true)
+       if( offsetTop < windowHeight + windowScroll && windowScroll < selfHeight + offsetTop){
+        console.log(true)
+        return true
+       }else{
+        return false
+       }
+     }
+    </script>
+    <p>题目3：当窗口滚动时，判断一个元素是不是出现在窗口可视范围。在元素第一次出现时在控制台打印 true，以后再次出现不做任何处理。用代码实现</p>
+    <script> 
+      $(window).on('scroll', function(){
+         $('img').not('.loadMore').each(function(){
+            if(isVisible($(this))){
+                show($(this))
+            }
+         })
+      })
+       
+      function show($img){
+       $imgs.each(function(){
+           var $attribut = $(this).attr('data-src')
+           $(this).attr({'src': $attribut,'class': 'loadMore'})
+       })
+      }
+
+      function isVisible($img){
+       var offsetTop = $img.offset().top
+       var windowHeight = $(window).height()
+       var windowScroll = $(window).scrollTop()
+       var selfHeight = $img.outerHeight(true)
+       $img.attr('class','loadMore')
+       if( offsetTop < windowHeight + windowScroll && windowScroll < selfHeight + offsetTop){
+        console.log(true)
+        return true
+       }else{
+        return false
+       }
+     }
+    </script>
+    <p>题目4： 图片懒加载的原理是什么？</p>
+    <script>
+        不是一开始加载所有图片，而是判断图片是否处在需要展示的位置，满足展示条件时加载图片
+    </script>
+</body>
+</html>

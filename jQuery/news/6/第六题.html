@@ -83,11 +83,16 @@
 
 //$('.ct').html('<div class="btn"></div>')                          9
 
-//console.log($('.ct').width())实际高度                              10
-//console.log($('.ct').innerWidth())实际高度+padding
-//console.log($('.ct').outerWidth())实际高度+padding+border
+//console.log($('.ct').width())实际宽度                              10
+//console.log($('.ct').height())实际高度                              10
+//console.log($('.ct').innerWidth())实际宽度+padding
+//console.log($('.ct').innerHeight())实际高度+padding
+//console.log($('.ct').outerWidth())实际宽度+padding+border
+//console.log($('.ct').outerHeight())实际高度+padding+border
+//console.log($('.ct').outerWidth(true))实际宽度+padding+border
+//console.log($('.ct').outerHeight(true))实际高度+padding+border
 
-// $('.ct').srcollTop()                                             11
+// $(window).srcollTop()                                             11
 
 
 // console.log($('.ct').offset())                                   12
@@ -106,9 +111,9 @@
 // })
 // $('.ct *') | $('.ct').find('*')                                  16
 
-// $(node).parents('.ct').find('.panel')                            17
+// $(node).parents('.ct').children('.panel')                            17
 
-// console.log($('.ct>li').length)                                  18
+// console.log($('.ct>li').length)  | $(el).size()                                18
 
 //console.log($('.index').index())                                  19
 </script>
