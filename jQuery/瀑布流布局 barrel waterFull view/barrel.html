@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+  <style>
+      * {
+      margin: 0;
+      padding: 0;
+    }
+
+
+    .img-preview{
+      width: 1000px;
+      margin: 0 auto;
+    }
+
+    .img-row {
+      margin-bottom: 8px;
+    }
+
+    .img-row:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    .img-box {
+      float: left;
+    }
+
+    .img-line .img-box:first-child {
+      padding-left: 0;
+    }
+  </style>
+   <div class="img-preview"></div>
+   <script>
+       function Barrel($ct){
+          this.$ct=$ct
+          this.baseHeight=100  //设置高度
+          this.loadImg()       //加载图片
+          this.rowList=[]      //存放图片信息
+       }
+
+       Barrel.prototype={
+         loadImg:function(){
+           _this=this//缓存全局this
+           var imgUrls = this.getImgUrls(50)
+           $.each(imgUrls,function(inx,url){
+             var img = new Image()
+             img.src=url
+             img.onload=function(){
+                var originWidth=img.width
+                var originHeight=img.height
+                    ratio=originWidth/originHeight//原始图片比例大小
+                
+                var imgInfo={
+                  target: $(img),
+                  height: _this.baseHeight,
+                  width: _this.baseHeight*ratio                
+                }
+                console.log(imgInfo)
+                _this.render(imgInfo)
+
+             }
+           })
+
+         },
+         render: function(imgInfo){//
+            var _this=this
+            var rowList=this.rowList,
+                rowWidth=0,
+                rowHeight=0,
+                clientWidth=this.$ct.width(),
+                lastImgInfo = imgInfo
+              
+                rowList.push(imgInfo)
+            $.each(this.rowList,function(inx, imgInfo){
+              rowWidth += imgInfo.width
+              if(rowWidth>clientWidth){
+                rowList.pop()
+                rowWidth = rowWidth - lastImgInfo.width
+                rowHeight = clientWidth*_this.baseHeight/rowWidth
+                _this.createRow(rowHeight)
+                _this.rowList=[]
+                _this.rowList.push(lastImgInfo)
+              }
+            })
+
+         },
+         createRow:function(rowHeight){//创建元素
+           var $rowCt = $('<div class="img-row"></div>')
+           $.each(this.rowList,function(idx,imgInfo){
+             var $imgCt = $('<div class="img-box"></div>'),
+                 $img = imgInfo.target;
+                 $img.height(rowHeight)
+                 $imgCt.append($img)
+                 $rowCt.append($imgCt)
+                 
+           })
+             _this.$ct.append($rowCt)
+
+         },
+        getImgUrls: function(num) {      //1创建图片      
+          var color, width, height, urls = [];
+          for (var i = 0; i < num; i++) {
+            color = Math.random().toString(16).substring(2, 8);
+            width = Math.floor(Math.random() * 100 + 50);
+            height = Math.floor(Math.random() * 30 + 50);
+            urls.push("http://placehold.it/" + width + "x" + height + "/" + color + "/fff");
+          }
+          return urls;
+        }
+       }
+
+       new Barrel($('.img-preview'))
+       </script>
+</body>
+</html>

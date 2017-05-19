@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html,body,ul,li,p,div{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        ul,li{
+            list-style: none;
+            
+        }
+
+        .wrap{
+            width: 900px;
+            margin: 0 auto;
+        }
+
+        .clearfix:after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+        #pic-ct{
+            position: relative;
+        }
+        #pic-ct .item{
+            position: absolute;
+            padding: 0 0 10px 0;
+            width: 280px;
+            margin: 10px;
+            border: 1px solid #DFDFDF;
+            background: #FFF;
+            opacity: 0;
+            transition: all .8s;
+        }
+        #pic-ct .item img{
+            margin: 10px;
+            width: 260px;
+        }
+        #pic-ct .item .header{
+            height: 25px;
+            margin: 0 12px;
+            border-bottom: 1px solid #DBDBDB;
+        }
+        #pic-ct .desp{
+            font-size: 12px;
+            line-height: 1.8;
+        margin: 10px 15px 0;
+        color: #777371;
+        }
+        #load{
+            visibility: hidden;
+            height: 20px;
+        }
+        .hide{
+            display: none
+        }
+    </style>
+    <script src="jquery-3.2.1.min.js"></script>
+</head>
+<body> 
+   <div class="wrap">
+        <div class="ct-waterfall">
+            <ul id="pic-ct" class="clearfix">
+            <!--<li class="item">
+                <a href="#" class="link">
+                    <img src="http://s.img.mix.sina.com.cn/auto/resize?img=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F5_img%2F2016_09%2F453_75615_657883.jpg&size=250_0" alt="">
+                </a>
+                <h4 class="header">标题</h4>
+                <p class="desp">
+                    当地时间2016年3月1日，在东部与亲俄武装作战中受伤的乌克兰士兵接受海豚治疗。
+                </p>
+            </li>-->
+                <!-- 用于计算 item 宽度和列数，但不展示出来-->
+             <li class="item hide"></li>
+            </ul>
+             <div id="load">我是看不见的</div>
+        </div>
+    </div>
+    <script>
+     var rowList = []
+   
+     var wrap = $('.wrap')
+     var check = true
+     var content = $('#pic-ct')
+     var $elShow = $('#load')
+     var curPage = 0
+     var perPageCount = 10
+     var flag = true
+     //判断是不是在视口里
+
+     loadImg()
+     $(window).on('scroll', loadImg)
+     function isShow($ele){
+        var offsetTop = $ele.offset().top
+        var windowHeight = $(window).height()
+        var windowScroll = $(window).scrollTop()
+        var selfHeight = $ele.outerHeight(true)
+        if( offsetTop < windowHeight + windowScroll && windowScroll < selfHeight + offsetTop){
+            return true
+        }else{
+            return false
+        }
+     }
+     function loadImg(){
+         if(isShow($elShow)){
+            if(!flag) return
+            flag = false
+            getNews(renderData)
+         }
+     }
+     function getNews(callback){
+
+        $.ajax({
+                url: 'http://platform.sina.com.cn/slide/album_tech',
+                dataType: 'jsonp',   
+                jsonp:"jsoncallback",
+                data: {
+                    app_key: '1271687855',
+                    num: perPageCount,
+                    page: curPage
+                }
+        }).done(function(ret){ 
+            if(ret.status.code==='0'){ 
+                callback(ret.data)
+                ++curPage
+            }
+        })
+    
+     }
+     function createElement(obj){
+              
+        var tpl = ''
+            tpl += '<li class="item">'
+            tpl += ' <a href='+ obj.url +'class="link"><img src=' + obj.img_url + ' alt=""></a>'
+            tpl += ' <h4 class=header>'+ obj.short_name +'</h4>'
+            tpl += '<p class=desp>'+ obj.short_intro+'</p>'
+            tpl += '</li>'
+        return $(tpl)
+     }
+     function renderData(list){
+        
+        $.each(list,function(idx,news){
+            var $node = createElement(news)
+            $node.find('img').on('load',function(){
+                content.append($node)
+                waterFull($node)
+                flag = true
+            })
+        })
+      }
+     function waterFull($node){
+        
+         var len = parseInt($('.wrap').width()/$('.item').width())
+          if(check){
+            for(var i = 0; i<len;i++){
+                rowList[i]=0
+            }
+        }
+        check = false
+
+      $node.each(function(){
+        var minValue = Math.min.apply(null, rowList)//每列最小值
+        var minIndex = rowList.indexOf(minValue)//最小值对应的位置
+        $(this).css({
+            top: rowList[minIndex],
+            left: minIndex * $(this).outerWidth(true),
+            opacity: 1
+        })
+        rowList[minIndex] += $(this).outerHeight(true)
+        var maxValue = Math.max.apply(null, rowList)
+        content.height(maxValue)
+
+      })
+     }
+    </script>
+</body>
+</html>
+                    <!--// function compare(max,min){
+                    //     return parseInt(Math.random() * (max-min) + min)
+                    // }
+                    // var diff1 = compare(200,50)
+                    // var diff2 = compare(200,50)
+                    // var diff3 = compare(200,50)
+                    // var rgba = 'rgba('+ diff1 +','+ diff2 +','+ diff3 +',.8)'
+
+                    // $(this).css({backgroundColor: rgba})-->
