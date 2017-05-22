@@ -1,0 +1,393 @@
+<style>
+	h4{
+		border-left: 4px solid #58a;
+		padding: 10px;
+		color: #58a;
+	}
+	pre{
+		background: #000;
+		color: #fff;
+		/*font-weight: bold;*/
+		font-size: 16px;
+		line-height: 25px;
+	}
+
+	p{
+		padding: 10px;
+		background: #000;
+		color: #fff;
+		line-height: 25px;
+
+	}
+	span{
+		color: #FF626C;
+	}
+</style>
+<h4>问题1： apply、call 、bind有什么作用，什么区别</h4>
+
+<p>
+	call 和 apply 作用一样。都是把obj(this)绑定到thisobj上。重新定义函数的执行环境.call接受n个参数的列表，apply接受若干个参数的数组
+	obj.call(thisobj,arg1,arg2,....)
+	obj.apply(thisobj,[arg1,arg2,...])
+	为什么要有apply和call？
+	<pre>
+	function T(name){
+	      this.name = name
+	      this.show = function(){
+	        console.log(this.name)
+	      }
+	}
+	function Person(age){
+	     this.age = age
+	}
+	假设在Person函数体内也需要这么一个show方法且一模一样，但又不想如下这样写，代码显得重复。
+	function Person(age,name){
+	     this.age = age
+	     this.show = function(){
+	        console.log(this.name)
+	      }
+	}
+	这时候call apply就有用了
+	function Person(age,name){
+	  T.call(this,name)
+	  this.age = age
+	}
+		<p>
+	bind()和call 和 apply类似，也是改变this.
+	只不过bind()是引用(不会立即执行)。call是调用(会立即执行)
+		</p>
+	</pre>
+</p>
+
+<h4>问题2： 以下代码输出什么?</h4>
+
+<pre>
+	var john = { 
+	  firstName: "John" 
+	}
+	function func() { 
+	  alert(this.firstName + ": hi!")
+	}
+	john.sayHi = func
+	john.sayHi()
+<hr>
+<span>
+  	var john = {
+  	 firstName: 'John',
+  	 func: function(){}
+  	}
+  	john.sayHi()//这里的this指向john
+  	Jonh:hi!
+</span>
+</pre>
+<h4>问题3： 下面代码输出什么，为什么</h4>
+<pre>
+	func() 
+	function func() { 
+	  alert(this)
+	}
+	<hr>
+	<span>
+		函数内部：this的值取决于函数时如何调用的
+		func() === undefined
+		但有些浏览器把undefined错误转换为window
+		func() === window
+	</span>
+</pre>
+<h4>问题4：下面代码输出什么</h4>
+<pre>
+document.addEventListener('click', function(e){
+    console.log(this);
+    setTimeout(function(){
+        console.log(this);
+    }, 200);
+}, false);
+<hr>	
+<p>这里的this指向window</p>
+</pre>
+
+<h4>问题5：下面代码输出什么，why</h4>
+<pre>
+var john = { 
+  firstName: "John" 
+}
+
+function func() { 
+  alert( this.firstName )
+}
+func.call(john)
+<hr>
+<p>
+ func() 执行 使用call把john当this传递进去 此时this变成john
+ 输出 ： 'John'
+</p>	
+</pre>
+<h4>问题6： 以下代码有什么问题，如何修改</h4>
+<pre>
+var module= {
+  bind: function(){
+    $btn.on('click', function(){
+      console.log(this) //this指什么
+      this.showMsg();
+    })
+  },
+  
+  showMsg: function(){
+    console.log('饥人谷');
+  }
+}
+<hr>
+<p>
+$btn.on('click', function(){
+      console.log(this) //this指什么
+      this.showMsg();
+    })
+    这里的this调用者($btn)
+
+ 修改后：var module= {
+  bind: function(){
+    $('#btn').on('click', function(){
+      console.log(this) //this指什么
+      this.showMsg()
+    }.bind(this))
+  },
+  
+  showMsg: function(){
+    console.log('饥人谷');
+  }
+}
+</p>
+</pre>
+<h4>问题7：有如下代码，解释Person、 prototype、__proto__、p、constructor之间的关联。</h4>
+<pre>
+function Person(name){
+    this.name = name;
+}
+Person.prototype.sayName = function(){
+    console.log('My name is :' + this.name);
+}
+var p = new Person("若愚")
+p.sayName();
+<hr>
+<p>
+function Person(name){
+    this.name = name;
+}
+var p = new Person("若愚")
+ //创建空对象作为this
+ //this.__proto__ = Person.prototype
+ //运行构造函数
+ //返回this
+ <img src="2.png" alt="">
+</p>
+</pre>
+<h4>问题8： 上例中，对对象 p可以这样调用 p.toString()。toString是哪里来的? 画出原型图?并解释什么是原型链。</h4>
+<pre>
+自己体内找不到，通过__proto__找，原型上找不到，通过__proto__继续找，知道找到为止
+<p>
+<img src="prototype.png" alt="">
+从上图中：原型与原型通过__proto__相连形成原型链
+</p>
+</pre>
+<h4>问题9：对String做扩展，实现如下方式获取字符串中频率最高的字符</h4>
+<pre>
+var str = 'ahbbccdeddddfg';
+var ch = str.getMostOften();
+console.log(ch); //d , 因为d 出现了5次
+<p> 
+     str = 'ahbbccdeddddfg'
+	 String.prototype.getMostOften = function(){
+     var obj = {}
+     var num = 0
+     var sub = ''
+     for(var i=0;i<str.length;i++){
+       if(obj[str[i]]){
+         ++obj[str[i]]
+       }else{
+         obj[str[i]] = 1
+       }
+     }
+     for(var key in obj){
+       if(obj[key]>num){
+         num = obj[key]
+         sub = key
+       }
+     }
+
+     return sub+'出现'+num+'次'
+   }
+   console.log(str.getMostOften())
+</p>
+<p>
+	String.prototype.getMostOften=function(){
+	   var obj = {}
+	   var num = 0
+	   var s = ''
+	   for(var i =0;i<this.length;i++){
+	     if(obj[this[i]]){
+	        ++ob[this[i]]
+	     }else{
+	       obj[this[i]] = 1
+	     }
+	   }
+	   for(var key in obj){
+	      if(obj[key]>num){
+	        s = key
+	        num = obj[key]
+	      }
+	   }
+	   return s + '出现' + num + '次'
+	}
+</p>
+<p>
+	 String.prototype.getMostOften=function(){
+     var obj = {}
+     var num = 0
+     var s = ''
+     for(var i =0;i<this.length;i++){
+       if(obj[this[i]]){
+          ++obj[this[i]]
+       }else{
+         obj[this[i]] = 1
+       }
+     }
+     for(var key in obj){
+        if(obj[key]>num){
+          s = key
+          num = obj[key]
+        }
+     }
+     return s + '出现' + num + '次,频率最高！'
+  }
+  var str = 'ahbbccdeddddfg'
+  var  str = new String() //String.prototype
+
+ console.log( str.getMostOften())
+</p>
+</pre>
+<h4>问题10： instanceOf有什么作用？内部逻辑是如何实现的？</h4>
+<pre> 
+    也叫关系运算符： A instanceOf B  B的原型对象出现在A的原型链中返回true
+	先从自己内部找 没有在通过__proto__到原型上找，原型上没有在通过__proto__在Object的原型上找
+    <img src="https://pic1.zhimg.com/v2-7e84676ba92256464382d0a0089694e8_b.png" alt="">
+</pre>
+<h4>问题11：继承有什么作用?</h4>
+<pre> 
+	继承可以提高代码的重用性。比如要写2个拖拽 ，一个拖拽在视口范围内活动，一个没有限制。利用继承来提高的代码的重用性
+    子类有继承父类的属性和方法。不需要重复写代码。
+    如果该改变效果，也可以覆盖原型上的方法，自定义一个。非常灵活
+</pre>
+<h4>问题12： 下面两种写法有什么区别?</h4>
+<pre>
+//方法1
+function People(name, sex){
+    this.name = name;
+    this.sex = sex;
+    this.printName = function(){
+        console.log(this.name);
+    }
+}
+var p1 = new People('饥人谷', 2)
+
+//方法2
+function Person(name, sex){
+    this.name = name;
+    this.sex = sex;
+}
+
+Person.prototype.printName = function(){
+    console.log(this.name);
+}
+var p1 = new Person('若愚', 27);
+
+<p>
+	方法一和方法二相比，把方法写在构造函数内，
+	假设有10个士兵，每个士兵都会跑
+	那我new 10次 在内存中就开辟了10次新的空间
+	而写在原型上，不但可以节省内存，方法还可以公用
+</p>
+</pre>
+<h4>问题13： Object.create 有什么作用？兼容性如何？</h4>
+<pre>
+	<p>
+		使用指定的原型对象和属性创建一个新的对象
+		function Aa(){}
+		Aa.prototype.show = function(){}
+		function Ba(){}
+		Ba.prototype = Object.create(Aa.prototype)
+		要写多个继承对象，可使用jq中$.extend()方法进行深度拷贝
+		<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create">参考地址</a>
+	</p>
+
+    对Ie不兼容
+</pre>
+<h4>问题14： hasOwnProperty有什么作用？ 如何使用？</h4>
+<pre>
+	<p>
+		判断某个对象是否含有指定的值（不包括通过原型链进行查找）
+		function Tab(name,age){
+		  this.name = name
+		  this.age = age
+		}
+		Tab.prototype.show=function(){
+		  console.log(this.name)
+		}
+		var obj = new Tab('lii',18)
+		console.log(obj.hasOwnProperty('name'))//true
+		console.log(obj.hasOwnProperty('show'))//false
+	</p>
+</pre>
+<h4>问题15：如下代码中call的作用是什么?</h4>
+<pre>
+function Person(name, sex){
+    this.name = name;
+    this.sex = sex;
+}
+function Male(name, sex, age){
+    Person.call(this, name, sex);    //这里的 call 有什么作用
+    this.age = age;
+}
+<p>
+function Male(name, sex, age){
+    Person.call(this, name, sex);    
+    this.age = age;
+}
+Person() 会执行
+this.name = name
+this.sex = sex
+当
+function Male(name, sex, age){
+    Person.call(this, name, sex);
+    this.age = age;
+}
+这里的this指的是当前对象 就完成了属性拷贝
+</p>
+</pre>
+<h4>问题16： 补全代码，实现继承 </h4>
+<pre>
+	function Person(name, sex){
+	    this.name = name
+	    this.sex = sex
+	}
+
+	Person.prototype.getName = function(){
+	    console.log(this.name)
+	};    
+
+	function Male(name, sex, age){
+	   Person.call(this,name,sex)
+	   this.age = age
+	}
+
+
+	Male.prototype = Object.create(Person.prototype)
+	Male.prototype.constructor = Male
+	Male.prototype.getAge = function(){
+		console.log(this.age)
+	}
+
+
+	var ruoyu = new Male('若愚', '男', 27);
+	ruoyu.getName();
+<p></p>
+</pre>
