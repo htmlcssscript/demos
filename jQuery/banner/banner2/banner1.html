@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+      *{
+        padding: 0;
+        margin: 0;
+      }
+ /*第一层*/
+    .container{
+       width:1226px;
+       height: 460px;
+       position: relative;
+       overflow: hidden;
+       margin: 30px auto;
+       cursor: pointer
+     }
+
+     .banner>ul,.btn>ul{
+       list-style: none
+     }
+/*第二层*/
+     .banner>ul{
+       position: absolute;
+       z-index: -1;
+     }
+     .banner>ul>li{
+       float: left;
+       width:1226px;
+       height: 460px;
+     }
+     .banner>ul:after{
+       content: '';
+       display: block;
+       clear: both;
+     }
+
+     /*上一个按钮*/
+     .prev,.next{
+       width: 150px;
+       height: 100%;
+       background-color: transparent;
+       position: absolute;
+       z-index: 2;
+       text-align: center;
+       cursor: pointer;
+       opacity: 1;
+     }
+     .next{
+       right: 0;
+     }
+
+     .prev~a,.next~a{
+       display: block;
+       width: 80px;
+       height: 80px;
+       background-color: rgba(0,0,0,.5);
+       border-radius: 3px;
+       position: absolute;
+       line-height: 75px;
+       text-align: center;
+       z-index: 1;
+       font-size: 50px;
+       color: #fff;
+       opacity: 0
+
+     }
+
+     .prev+a{
+       left: 5%;
+       top: 50%;
+       margin-top: -40px;
+       margin-left: -40px;
+     }
+
+     .next+a{
+       left: 95%;
+       top: 50%;
+       margin-top: -40px;
+       margin-left: -40px;
+     }
+
+     /*小圆点*/
+     .btn>ul{
+       position: absolute;
+       left: 50%;
+       top: 80%;
+       transform: translateX(-50%)
+     }
+     .btn>ul>li{
+       width: 10px;
+       height: 10px;
+       border-radius: 50%;
+       background-color: #fff;
+       float: left;
+       margin: 5px;
+
+     }
+     .btn>ul>li.active{
+       background-color: red;
+       transition: all .5s linear;
+       
+     }
+     .btn>ul>li.active:hover{
+       transform: scale(1.5)
+     }
+    </style>
+    <script src="libs/jQuery.min.1.9.0.js"></script>
+    <script>
+      $(function(){
+        var $banner = $('.banner>ul') //定义全局变量
+        
+        var $prev = $('.prev')
+        var $next = $('.next')
+        var $btnLi = $('.btn>ul>li')
+        var $imgW = $banner.find('li').eq(0).outerWidth(true)
+
+        var $btnPrev = $('.btn-prev')
+        var $btnNext = $('.btn-next')
+
+        var $liLength = $banner.find('li').length
+
+        var $pageIndex = 0
+
+        var $first = $banner.find('li').first().clone()//克隆第一张和最后一张
+        var $last = $banner.find('li').last().clone()
+
+        var flag1 = true
+        var flag2 = true
+
+        var iNow2 = 0
+         
+        $banner.append($first)  //克隆的图片放置到ul中
+        $banner.prepend($last)
+
+        $banner.css({         //设置显示第一张图和ul的宽度
+          'left': -$imgW,
+          'width': $imgW*$banner.children().length
+          }) 
+
+        $prev.on('mouseover',function(){ //z-index(prev)>z-index($btnPrev)
+           if(!flag1) return
+           flag1 = false
+             $btnPrev.animate({'opacity': 1})
+        }).on('mouseout',function(){
+             $btnPrev.animate({'opacity': 0})
+               flag1 = true
+        })
+
+        $next.on('mouseover',function(){
+            if(!flag2) return
+            flag2 = false
+             $btnNext.animate({'opacity': 1})
+        }).on('mouseout',function(){
+             $btnNext.animate({'opacity': 0})
+               flag2 = true
+        })
+
+        $next.on('click',function(){ //点击切换图片left值
+           if($banner.is(':animated')) return 
+           ++iNow2
+           playNext()
+        })
+
+       function playNext(){
+           $banner.animate({'left': -(iNow2+1)*$imgW},function(){
+            if(iNow2 == $liLength){
+              $banner.css({'left': -$imgW})
+              iNow2 = 0
+            }
+            btnChangeColor(iNow2)
+          })
+       }
+        $prev.on('click',function(){
+          if($banner.is(':animated')) return 
+           iNow2--
+           playPrev()
+        })
+
+        function playPrev(){
+          $banner.animate({'left': -(iNow2+1)*$imgW},function(){
+            if(iNow2 < 0){
+              $banner.css({'left': -$imgW*$liLength})
+              iNow2 = $liLength - 1
+            }
+            console.log(iNow2)
+            btnChangeColor(iNow2)
+          })
+        }
+
+      function btnChangeColor(iNow2){//控制每个小圆点的颜色变化
+          $btnLi.attr('class','')
+          $btnLi.eq(iNow2).attr('class','active')
+        }
+
+
+    $btnLi.on('click',function(){//点击小圆点来控制图片left值
+          var $index = $(this).index()
+          iNow2 = $index
+          $btnLi.attr('class','')
+                .eq($index).attr('class','active')
+          $banner.animate({'left': -($index+1)*$imgW})
+      })
+
+      function self(){
+           iNow2++
+           $banner.animate({'left': -(iNow2+1)*$imgW},function(){
+            if(iNow2 == $liLength){
+              $banner.css({'left': -$imgW})
+              iNow2 = 0
+            }
+            btnChangeColor(iNow2)
+           })
+      }
+     
+     var timer = setInterval(self ,2000)
+     
+
+     $('.container')[0].onmouseover=function(){
+       console.log(timer)
+       clearInterval(timer)
+     }
+     $('.container')[0].onmouseout=function(){
+      timer = setInterval(self,2000)
+     }
+
+  })
+    </script>
+</head>
+<body>
+    <div class="container">
+     <div class="banner"><!--轮播的图片-->
+        <ul>  
+          <li><a><img src="images/banner1.jpg"></a></li>
+          <li><a><img src="images/banner2.jpg"></a></li>
+          <li><a><img src="images/banner3.jpg"></a></li>
+          <li><a><img src="images/banner4.jpg"></a></li>
+        </ul>
+     </div>
+  
+     <div class="prev"><!--上一个按钮-->
+     </div>
+     <a class="btn-prev"><</a>
+
+     <div class="next"><!--下一个按钮-->
+     </div>
+     <a class="btn-next">></a>
+
+     <div class="btn"><!--图片对应的小圆点-->
+        <ul>
+          <li class="active"></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+    </div>
+</body>
+</html>

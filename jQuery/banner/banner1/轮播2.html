@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       li{
+           list-style: none
+       }
+       .img-ct,.bullet{
+           padding: 0;
+           margin: 0;
+       }
+       .carousel{
+         width: 1280px;
+         height: 500px;
+         overflow: hidden;
+         position: relative;
+       }
+       a{
+           text-decoration: none
+       }
+       .img-ct > li{
+         float: left;
+       }
+       .clearfix：after{
+           display: block;
+           clear：both;
+       }
+       .img-ct{
+           width: 1280px;
+           height: 500px;
+           overflow: hidden;
+           position: absolute;
+           z-index: -1;
+       }
+       .img-ct li img{
+           width: 1280px;
+           height: 500px;
+       }
+       .bullet-ct{
+           border: 1px solid;
+           width: 300px;
+           height: 200px;
+           overflow: hidden;
+       }
+       .btn{
+           width: 50px;
+           height: 50px;
+           border-radius: 50%;
+           background-color: #ddd;
+           position: absolute;
+           display: block;
+           text-align: center;
+           line-height: 50px;
+           opacity: .5;
+           color: blue;
+           font-size: 20px;
+       }
+       .btn-pre{
+           left: 0;
+           top: 50%;
+           transform: translateY(-50%);
+
+       }
+       .btn-next{
+           right: 0;
+           top: 50%;
+           transform: translateY(-50%);
+
+       }
+       .bullet{
+           position: absolute;
+           left: 50%;
+           bottom: 30px;
+           transform: translateX(-50%);
+
+       }
+       .bullet>li{
+           float: left;
+           width: 40px;
+           height: 5px;
+           border-radius: 4px;
+           background-color: #fff;
+           margin: 0 5px;
+           cursor: pointer;
+       }
+       .bullet>.active{
+           background-color: red;
+       }
+    </style>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="holder.min.js"></script>
+</head>
+<body>
+  <div class="carousel">
+    <ul class="img-ct  clearfix">
+       <li><a href=""><img src="banner/1.jpg" alt="1"></a></li>
+       <li><a href=""><img src="banner/2.jpg" alt="2"></a></li>
+       <li><a href=""><img src="banner/3.jpg" alt="3"></a></li>
+    </ul>
+    <a class="btn btn-pre" href="#">&lt;</a>
+    <a class="btn btn-next" href="#">&gt;</a>
+    <ul class="bullet">
+      <li class="active"></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+<script>
+        var $imgct = $('.img-ct')
+        var $bullet = $('.bullet')
+        var $li = $bullet.children()
+        var $btnPre = $('.btn-pre')
+        var $btnNext = $('.btn-next')
+        var $liWidth = $imgct.find('li').eq(0).outerWidth(true)
+        var $pageIndex = 0
+        var $imgLength = $imgct.children().length
+
+        var $first = $imgct.find('li').first().clone()
+        var $last = $imgct.find('li').last().clone()
+
+        $imgct.append($first)
+        $imgct.prepend($last)
+
+        $imgct.css({'left': -$liWidth,'width': $liWidth*($imgLength+2)})
+
+        $btnNext.on('click',function(){
+             if($imgct.is(':animated')) return
+             $pageIndex++
+             playNext()
+        })
+        function playNext(){
+          $imgct.animate({'left': '-='+$liWidth},function(){
+               if($pageIndex === $imgLength){
+                $imgct.css({'left': -$liWidth})
+                 $pageIndex = 0
+               }
+           })
+             bullet($pageIndex)
+        }
+        $btnPre.on('click',function(){
+                if($imgct.is(':animated')) return
+                --$pageIndex
+                playPre()
+        })
+
+        function playPre(){
+         $imgct.animate({'left': '+=' + $liWidth},function(){
+             if($pageIndex<0){
+               $imgct.css('left',-$liWidth * $imgLength)
+               $pageIndex = $imgLength - 1
+             }
+           })
+                bullet($pageIndex)
+        }
+
+        function bullet($pageIndex){
+          $bullet.children().attr('class','')
+          console.log($pageIndex)
+          if($pageIndex === 3){
+            $pageIndex =0
+          }
+          $bullet.find('li').eq($pageIndex).addClass('active')
+        }
+        $li.on('click',function(){
+          if($imgct.is(':animated')) return
+          console.log($(this).index())
+          var $index = $(this).index()+1
+          $imgct.animate({'left':-$index*$liWidth},1000)
+          $bullet.find('li').attr('class','')
+          $bullet.find('li').eq($index-1).attr('class','active')
+        })
+</script>
+</body>
+</html>
