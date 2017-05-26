@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+			padding-top: 0;
+			padding-bottom: 40px;
+		}
+	</style>
+</head>
+<body> 
+    <video id="myVideo" src="video/Joel Hanson - Traveling Light.mp3"
+	    controls
+	    autoplay 
+	    loop 
+	    style="visibility: hidden;position: absolute;top: -10000px" 
+    ></video>
+    <script>
+    window.onload = function(){
+    	document.getElementById('myVideo').volume = 0.3
+    }
+    </script>
+    <!-- tab -->
+    <link rel="stylesheet" href="css/tab.css">
+	<div class="tab">
+	    <ul class="m-tab">
+			<li class="active">主页</li>
+			<li>电子商品</li>
+			<li>生活用品</li>
+			<li>关于</li>
+			<li>详细信息</li>
+			<li>博客</li>
+	    </ul>
+	</div>
+    <!-- banner -->
+	<link rel="stylesheet" href="css/banner.css">
+	<div class="container">
+		     <div class="banner"><!--轮播的图片-->
+		        <ul>
+		          <li class="first"><a><img src="images/banner1.jpg"></a></li>
+		          <li><a><img src="images/banner2.jpg"></a></li>
+		          <li><a><img src="images/banner3.jpg"></a></li>
+		          <li><a><img src="images/banner4.jpg"></a></li>
+		        </ul>
+		     </div>
+
+		     <div class="prev"><!--上一个按钮-->
+		     </div>
+		     <a class="btn-prev"><</a>
+
+		     <div class="next"><!--下一个按钮-->
+		     </div>
+		     <a class="btn-next">></a>
+
+		     <div class="btn"><!--图片对应的小圆点-->
+		        <ul>
+					<li class="active"></li>
+					<li></li>
+					<li></li>
+					<li></li>
+		        </ul>
+		     </div>
+	</div>
+     <!-- waterfull -->
+	<link rel="stylesheet" href="css/waterFull.css">
+	<div class="wrap">
+        <div class="ct-waterfall">
+            <ul id="pic-ct" class="clearfix">
+            <!--<li class="item">
+                <a href="#" class="link">
+                    <img src="http://s.img.mix.sina.com.cn/auto/resize?img=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F5_img%2F2016_09%2F453_75615_657883.jpg&size=250_0" alt="">
+                </a>
+                <h4 class="header">标题</h4>
+                <p class="desp">
+                    当地时间2016年3月1日，在东部与亲俄武装作战中受伤的乌克兰士兵接受海豚治疗。
+                </p>
+            </li>-->
+                <!-- 用于计算 item 宽度和列数，但不展示出来-->
+             <li class="item hide"></li>
+            </ul>
+             <div id="load">loadMore</div>
+        </div>
+    </div>
+    <!-- top-->
+    <link rel="stylesheet" href="css/scrollTop.css">
+    <div class="top">回到顶部</div>
+	<script data-main="js/dist/merge" src="js/lib/require.js"></script>
+</body>
+</html>

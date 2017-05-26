@@ -1,0 +1,5 @@
+    li{list-style: none}
+    .tab{display: block;border-bottom: 1px solid #ccc;padding: 5px 0 0 5px; }
+    .m-tab{font-size: 0;padding:0}
+    .m-tab>.active{border: 1px solid #ccc;border-bottom-color: #fff;border-radius: 5px 5px 0 0;color: #f60;}
+    .m-tab>li{display: inline-block;font-size:16px;padding: 15px 25px;margin-bottom:-1px;color: #000;border: 1px solid transparent;}

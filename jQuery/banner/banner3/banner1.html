@@ -5,114 +5,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-
     <style>
-      *{
-        padding: 0;
-        margin: 0;
-      }
- /*第一层*/
-    .container{
-       width:1226px;
-       height: 460px;
-       position: relative;
-       /*overflow: hidden;*/
-       margin: 30px auto;
-       cursor: pointer
-     }
+        *{
+          padding: 0;
+          margin: 0;
+        }
+        /*第一层*/
+        .container{
+           width:1226px;
+           height: 460px;
+           position: relative;
+           /*overflow: hidden;*/
+           margin: 30px auto;
+           cursor: pointer
+         }
 
-     .banner>ul,.btn>ul{
-       list-style: none
-     }
-/*第二层*/
-     .banner>ul{
-       position: absolute;
-       z-index: -1;
-     }
-     .banner>ul>li{
-       width:1226px;
-       height: 460px;
-       position: absolute;
-       opacity: 0;
-     }
-     .banner>ul>li.first{
-       opacity: 1;
-     }
-     .banner>ul:after{
-       content: '';
-       display: block;
-       clear: both;
-     }
+         .banner>ul,.btn>ul{
+           list-style: none
+         }
+         /*第二层*/
+         .banner>ul{
+           position: absolute;
+           z-index: -1;
+         }
+         .banner>ul>li{
+           width:1226px;
+           height: 460px;
+           position: absolute;
+           opacity: 0;
+         }
+         .banner>ul>li.first{
+           opacity: 1;
+         }
+         .banner>ul:after{
+           content: '';
+           display: block;
+           clear: both;
+         }
 
-     /*上一个按钮*/
-     .prev,.next{
-       width: 150px;
-       height: 100%;
-       background-color: transparent;
-       position: absolute;
-       z-index: 2;
-       text-align: center;
-       cursor: pointer;
-       opacity: 1;
-     }
-     .next{
-       right: 0;
-     }
+         /*上一个按钮*/
+         .prev,.next{
+           width: 150px;
+           height: 100%;
+           background-color: transparent;
+           position: absolute;
+           z-index: 2;
+           text-align: center;
+           cursor: pointer;
+           opacity: 1;
+         }
+         .next{
+           right: 0;
+         }
 
-     .prev~a,.next~a{
-       display: block;
-       width: 80px;
-       height: 80px;
-       background-color: rgba(0,0,0,.5);
-       border-radius: 3px;
-       position: absolute;
-       line-height: 75px;
-       text-align: center;
-       z-index: 1;
-       font-size: 50px;
-       color: #fff;
-       opacity: 0
+         .prev~a,.next~a{
+           display: block;
+           width: 80px;
+           height: 80px;
+           background-color: rgba(0,0,0,.5);
+           border-radius: 3px;
+           position: absolute;
+           line-height: 75px;
+           text-align: center;
+           z-index: 1;
+           font-size: 50px;
+           color: #fff;
+           opacity: 0
 
-     }
+         }
 
-     .prev+a{
-       left: 5%;
-       top: 50%;
-       margin-top: -40px;
-       margin-left: -40px;
-     }
+         .prev+a{
+           left: 5%;
+           top: 50%;
+           margin-top: -40px;
+           margin-left: -40px;
+         }
 
-     .next+a{
-       left: 95%;
-       top: 50%;
-       margin-top: -40px;
-       margin-left: -40px;
-     }
+         .next+a{
+           left: 95%;
+           top: 50%;
+           margin-top: -40px;
+           margin-left: -40px;
+         }
 
-     /*小圆点*/
-     .btn>ul{
-       position: absolute;
-       left: 50%;
-       top: 80%;
-       transform: translateX(-50%)
-     }
-     .btn>ul>li{
-       width: 10px;
-       height: 10px;
-       border-radius: 50%;
-       background-color: #fff;
-       float: left;
-       margin: 5px;
+         /*小圆点*/
+         .btn>ul{
+           position: absolute;
+           left: 50%;
+           top: 80%;
+           transform: translateX(-50%)
+         }
+         .btn>ul>li{
+           width: 10px;
+           height: 10px;
+           border-radius: 50%;
+           background-color: #fff;
+           float: left;
+           margin: 5px;
 
-     }
-     .btn>ul>li.active{
-       background-color: red;
-       transition: all .5s linear;
-       
-     }
-     .btn>ul>li.active:hover{
-       opacity: 1
-     }
+         }
+         .btn>ul>li.active{
+           background-color: red;
+           transition: all .5s linear;
+           
+         }
+         .btn>ul>li.active:hover{
+           opacity: 1
+         }
     </style>
     <script src="libs/jQuery.min.1.9.0.js"></script>
     <script>
