@@ -248,11 +248,11 @@
 
        Banner.prototype.move = function(){
        	    var This = this
-
+              debugger
         			this.container[0].onmouseover=function(){
         			  clearInterval(This.timer)
         			}
-
+              debugger
         			this.container[0].onmouseout=function(){
         			  This.timer = setInterval(function(){
                   This.self()
